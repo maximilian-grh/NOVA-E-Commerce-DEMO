@@ -2,7 +2,13 @@ import Link from "next/link";
 import { formatter } from "../utils/formatter";
 import { getServerSideProps } from "../utils/stripeuserdata";
 
-function CustomerProfile({ customer, paymentMethod, lastFourOrders }) {
+function CustomerProfile({
+  customer,
+  paymentMethod,
+  lastFourOrders,
+  pdfUrls,
+  invoicesSortedByOrders,
+}) {
   // Check if the user is unauthenticated
   if (!customer) {
     // The user is not authenticated, redirect to the login page
@@ -25,7 +31,7 @@ function CustomerProfile({ customer, paymentMethod, lastFourOrders }) {
         <p>Name: {customer.name || "Nicht angemeldet"}</p>
         <p>Email: {customer.email || "/"}</p>
         <p>Phone: {customer.phone || "/"}</p>
-        <p>Phone: {customer.id || "/"}</p>
+        <p>Customer ID: {customer.id || "/"}</p>
       </div>
       {/* Customer Data - Payments */}
       <div className="bg-gray-200 rounded-2xl p-8 max-w-md mt-4">
@@ -34,21 +40,31 @@ function CustomerProfile({ customer, paymentMethod, lastFourOrders }) {
         <p className="flex">
           Kartentyp: <div className="flex pl-2 uppercase">{brand}</div>
         </p>
-        <p>Rückstand: {formatter.format(customer.balance || "/")}</p>
+        <p>Rückstand: {formatter.format(customer.balance / 100)}</p>
       </div>
       {/* Customer Data - Orders */}
       <div className="bg-gray-200 rounded-2xl p-8 max-w-md mt-4">
-        <h2 className="pb-4 font-bold text-xl">Letzten Bestellungen</h2>
-        {lastFourOrders.map((order) => (
-          <div className="mt-2 pb-2" key={order.id}>
-            <p>Amount: {formatter.format(order.amount)}</p>
-            <p>Datum: {new Date(order.created * 1000).toLocaleDateString()}</p>
-            <p className="flex">
-              Status: <div className="text-green-400 pl-2">{order.status}</div>
+        <h2 className="pb-4 font-bold text-xl">Alle Rechnungen</h2>
+        {invoicesSortedByOrders.map((invoice) => (
+          <div className="mt-2 pb-2" key={invoice.id}>
+            <p>Betrag: {formatter.format(invoice.amount / 100)}</p>
+            <p>
+              Datum: {new Date(invoice.created * 1000).toLocaleDateString()}
             </p>
-            {/* <Link href={receiptUrl} target="_blank">
-              Download Receipt
-            </Link> */}
+            <p className="flex">
+              Status:{" "}
+              <div className="text-green-400 pl-2">
+                {invoice.status === "succeeded" ? "Bezahlt" : invoice.status}
+              </div>
+            </p>
+            <div>
+              <a
+                href={pdfUrls[invoicesSortedByOrders.indexOf(invoice)]}
+                rel="noreferrer"
+              >
+                <p>Rechnung herunterladen</p>
+              </a>
+            </div>
           </div>
         ))}
       </div>
