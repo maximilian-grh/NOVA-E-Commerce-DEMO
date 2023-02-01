@@ -33,15 +33,13 @@ export async function getServerSideProps(context) {
     // Retrieve all Invoice Data (type: .pdf)
     const invoices = await stripe.invoices.list({
       customer: customer.id,
-      status: "paid",
     });
-    // fetch only the invoice pdf url
-    const pdfUrls = invoices.data.map((invoice) => invoice.invoice_pdf);
-
-    const invoicesSortedByOrders = lastFourOrders.map((order) => {
-      const invoice = invoices.data.find((inv) => inv.charge === order.id);
-      return { ...invoice, order_id: order.id };
-    });
+    const invoicesSortedByOrders = invoices.data.sort(
+      (a, b) => b.created - a.created
+    );
+    const pdfUrls = invoicesSortedByOrders.map(
+      (invoice) => invoice.invoice_pdf
+    );
 
     return {
       props: {
