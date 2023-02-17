@@ -27,20 +27,21 @@ Auth0 is used for user login and registration. This user data is synced with Str
 
 If the client needs to update his client information (name, email, shipping and so on) he can do it with the "edit-icon". This function allows updating all client data in real time, which is very efficient because the webshop owner doesn't need to edit data manually.
 
-The Client sees all data:
+The Client sees all data & ready to update:
 
 - Name
+  - Full Name
 - E-Mail
 - Phone Number
 - Customer ID
 - Shipping Adress
-
---- This is not included to edit as a client: ---
-
 - Payment Method
   - Type
   - Last 4 Numbers
   - Residue
+
+--- This is not included to edit as a client: ---
+
 - Last 4 Orders
   - Amount
   - Date

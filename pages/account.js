@@ -1,6 +1,8 @@
 import Link from "next/link";
 import { formatter } from "../utils/formatter";
 import { getServerSideProps } from "../utils/stripeuserdata";
+import { ArrowDownTrayIcon } from "@heroicons/react/24/solid";
+import { CheckCircleIcon } from "@heroicons/react/24/outline";
 
 function CustomerProfile({
   customer,
@@ -53,12 +55,19 @@ function CustomerProfile({
               <p className="flex">
                 Status:{" "}
                 <div className="text-green-400 pl-2">
-                  {invoice.status === "paid" ? "Paid" : invoice.status}
+                  {invoice.status === "paid" ? (
+                    <CheckCircleIcon className="h-6 w-8" />
+                  ) : (
+                    invoice.status
+                  )}
                 </div>
               </p>
               <div>
                 <a href={pdfUrls[index]} rel="noreferrer">
-                  <p>Rechnung herunterladen</p>
+                  <p className="flex">
+                    <p className="hover:underline">Rechnung herunterladen</p>{" "}
+                    <ArrowDownTrayIcon className="flex h-6 w-4 justify-center ml-2" />
+                  </p>
                 </a>
               </div>
             </div>
