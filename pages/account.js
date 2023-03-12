@@ -25,7 +25,7 @@ function CustomerProfile({
   } else {
     customer;
     return (
-      <div className="p-8 bg-black h-screen text-white">
+      <div className="p-8 bg-black h-full text-white">
         {/* Customer Data - General */}
         <div className="bg-gray-900 rounded-2xl p-8 max-w-md">
           <h1 className="text-xl font-bold pb-4">Kundendaten</h1>
