@@ -6,21 +6,32 @@ export async function getServerSideProps(context) {
   // Check if the user is authenticated
   if (session) {
     // Get the email of the logged-in user
-    const mail = session.user.email;
+    const email = session.user.email;
 
     // Load Stripe
     const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 
-    // Use the email to retrieve the customer data from Stripe
-    const customers = await stripe.customers.list({ email: mail });
-    const customer = await stripe.customers.retrieve(customers.data[0].id);
+    // Retrieve the customer with the specified email
+    const customer = await stripe.customers
+      .list({ email: email, limit: 1 })
+      .then((customers) => customers.data[0]);
 
-    // Retrieve Payments from stripe by Customer ID
-    const paymentMethods = await stripe.paymentMethods.list({
-      customer: customer.id,
-      type: "card",
-    });
-    const paymentMethod = paymentMethods.data[0];
+    // Retrieve Payment Method ID from customer data
+    const paymentMethodId = customer.invoice_settings.default_payment_method;
+
+    // Retrieve Payment Method data if payment method ID is not null
+    let paymentMethod = null;
+    if (paymentMethodId) {
+      paymentMethod = await stripe.paymentMethods.retrieve(paymentMethodId);
+    }
+
+    // Retrieve Address data from Payment Method if payment method exists
+    let address = null;
+    if (paymentMethod && paymentMethod.billing_details) {
+      address = paymentMethod.billing_details.address;
+    } else if (customer.address) {
+      address = customer.address;
+    }
 
     // Retrieve the last 4 Orders of the customer
     const charges = await stripe.charges.list({
@@ -45,6 +56,7 @@ export async function getServerSideProps(context) {
       props: {
         customer: customer,
         paymentMethod: paymentMethod,
+        address: address,
         lastFourOrders: lastFourOrders,
         pdfUrls: pdfUrls,
         invoicesSortedByOrders: invoicesSortedByOrders,
@@ -52,7 +64,7 @@ export async function getServerSideProps(context) {
     };
   } else {
     // The user is not authenticated, return an empty object
-    console.log.apply("Nicht angemeldet");
+    console.log("Not authenticated");
     return {
       props: {},
     };

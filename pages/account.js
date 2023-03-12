@@ -10,6 +10,7 @@ function CustomerProfile({
   lastFourOrders,
   pdfUrls,
   invoicesSortedByOrders,
+  address,
 }) {
   let last4 = "N/A";
   if (paymentMethod && paymentMethod.card) {
@@ -21,19 +22,35 @@ function CustomerProfile({
   }
 
   if (!customer) {
-    <div>Error 303</div>;
+    return <div>Error 303</div>;
   } else {
     customer;
     return (
-      <div className="p-8 bg-black h-full text-white">
+      <div className="p-8 bg-black h-screen w-full text-white">
         {/* Customer Data - General */}
         <div className="bg-gray-900 rounded-2xl p-8 max-w-md">
           <h1 className="text-xl font-bold pb-4">Kundendaten</h1>
           <p>Name: {customer.name || "/"}</p>
           <p>Email: {customer.email || "/"}</p>
-          <p>Phone: {customer.phone || "/"}</p>
-          <p>Customer ID: {customer.id || "/"}</p>
+          <p>Telefonnummer: {customer.phone || "/"}</p>
+          <p>Kundennummer: {customer.id || "/"}</p>
         </div>
+        {/* Customer Data - Address */}
+        <div className="bg-gray-900 rounded-2xl p-8 max-w-md mt-4">
+          <h1 className="text-xl font-bold pb-4">Rechnungsadresse</h1>
+          {address ? (
+            <>
+              <p>Adresszeile 1 : {address.line1 || "/"}</p>
+              <p>Adresszeile 2 : {address.line2 || "/"}</p>
+              <p>Postleitzahl : {address.postal_code || "/"}</p>
+              <p>Stadt: {address.city || "/"}</p>
+              <p>Land: {address.country || "/"}</p>
+            </>
+          ) : (
+            <p className="text-gray-400">Adressdaten nicht verfügbar</p>
+          )}
+        </div>
+
         {/* Customer Data - Payments */}
         <div className="bg-gray-900 rounded-2xl p-8 max-w-md mt-4">
           <h2 className="pb-4 font-bold text-xl">Bezahlungsmethoden</h2>
