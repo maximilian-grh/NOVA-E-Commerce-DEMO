@@ -16,6 +16,13 @@ export async function getServerSideProps(context) {
       .list({ email: email, limit: 1 })
       .then((customers) => customers.data[0]);
 
+    // Retrieve Customer Payments Method by Customer ID
+    const paymentMethods = await stripe.paymentMethods.list({
+      customer: customer.id,
+      type: "card",
+    });
+    const CustomerPaymentMethod = paymentMethods.data[0];
+
     // Retrieve Payment Method ID from customer data
     const paymentMethodId = customer.invoice_settings.default_payment_method;
 
@@ -36,7 +43,6 @@ export async function getServerSideProps(context) {
     // Retrieve the last 4 Orders of the customer
     const charges = await stripe.charges.list({
       customer: customer.id,
-      limit: 4,
     });
 
     const lastFourOrders = charges.data;
@@ -55,7 +61,7 @@ export async function getServerSideProps(context) {
     return {
       props: {
         customer: customer,
-        paymentMethod: paymentMethod,
+        CustomerPaymentMethod: CustomerPaymentMethod,
         address: address,
         lastFourOrders: lastFourOrders,
         pdfUrls: pdfUrls,

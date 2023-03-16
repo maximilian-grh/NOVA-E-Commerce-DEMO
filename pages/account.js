@@ -6,27 +6,27 @@ import { CheckCircleIcon } from "@heroicons/react/24/outline";
 
 function CustomerProfile({
   customer,
-  paymentMethod,
+  CustomerPaymentMethod,
   lastFourOrders,
   pdfUrls,
   invoicesSortedByOrders,
   address,
 }) {
   let last4 = "N/A";
-  if (paymentMethod && paymentMethod.card) {
-    last4 = paymentMethod.card.last4;
+  if (CustomerPaymentMethod && CustomerPaymentMethod.card) {
+    last4 = CustomerPaymentMethod.card.last4;
   }
   let brand = "N/A";
-  if (paymentMethod && paymentMethod.card) {
-    brand = paymentMethod.card.brand;
+  if (CustomerPaymentMethod && CustomerPaymentMethod.card) {
+    brand = CustomerPaymentMethod.card.brand;
   }
 
   if (!customer) {
-    return <div>Error 303</div>;
+    return <div>Du bist nicht angemeldet</div>;
   } else {
     customer;
     return (
-      <div className="p-8 bg-black h-screen w-full text-white">
+      <div className="p-8 bg-black h-full w-full text-white">
         {/* Customer Data - General */}
         <div className="bg-gray-900 rounded-2xl p-8 max-w-md">
           <h1 className="text-xl font-bold pb-4">Kundendaten</h1>
@@ -35,6 +35,7 @@ function CustomerProfile({
           <p>Telefonnummer: {customer.phone || "/"}</p>
           <p>Kundennummer: {customer.id || "/"}</p>
         </div>
+
         {/* Customer Data - Address */}
         <div className="bg-gray-900 rounded-2xl p-8 max-w-md mt-4">
           <h1 className="text-xl font-bold pb-4">Rechnungsadresse</h1>
@@ -71,11 +72,14 @@ function CustomerProfile({
               </p>
               <p className="flex">
                 Status:{" "}
-                <div className="text-green-400 pl-2">
+                <div className=" pl-2">
                   {invoice.status === "paid" ? (
-                    <CheckCircleIcon className="h-6 w-8" />
+                    <CheckCircleIcon className="h-6 w-8 text-green-400" />
                   ) : (
-                    invoice.status
+                    <div>
+                      {/* invoice.status */}
+                      <div className="text-red-400">Offen</div>
+                    </div>
                   )}
                 </div>
               </p>
