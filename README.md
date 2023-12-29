@@ -56,6 +56,11 @@ To check if all dependencies match the latest package version run:
 
 # AUTH0 Custom Actions for Stripe Sync
 
-Stripe Full Integration (see file: custom_actions/stripe_auth.txt)
-Link User to Stripe (see file: custom_actions/stripe_auth_linking.txt)
-Add Stripe Customer ID to Access Token (see file: custom_actions/stripe_auth_token.txt)
+- Stripe Full Integration
+  (see file: custom_actions/stripe_auth.txt)
+
+- Link User to Stripe
+  (see file: custom_actions/stripe_auth_linking.txt)
+
+- Add Stripe Customer ID to Access Token
+  (see file: custom_actions/stripe_auth_token.txt)
