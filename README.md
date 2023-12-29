@@ -57,10 +57,34 @@ To check if all dependencies match the latest package version run:
 # AUTH0 Custom Actions for Stripe Sync
 
 - Stripe Full Integration
+
 ###### (see file: custom_actions/stripe_auth.txt)
 
 - Link User to Stripe
+
 ###### (see file: custom_actions/stripe_auth_linking.txt)
 
 - Add Stripe Customer ID to Access Token
+
 ###### (see file: custom_actions/stripe_auth_token.txt)
+
+# Getting started
+
+0. git clone
+1. npm install
+2. Configure the Auth0 SDK for env.
+3. For AUTH_SECRET - run: openmssl rand -hex 32
+4. Add the Auth0 Keys, IDs & Domain
+
+# Git Commits Legend
+
+- Add | Description
+  - Packages, Functions, File Structure, Description
+- Fix | Description
+  - Bugs
+- Frontend | Description
+  - Styles, Components
+- Backend | Description
+  - APIs
+- Test | Description
+  - Unit Test, Component Test, Integration Test, E2E Test
