@@ -47,3 +47,9 @@ The Client sees all data & ready to update:
   - Date
   - Status
   - Invoice .pdf
+
+# Testing
+
+To check if all dependencies match the latest package version run:
+
+"ncu" then "ncu -u" (for upgrade)
