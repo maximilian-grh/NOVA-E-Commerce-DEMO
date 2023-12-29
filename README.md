@@ -2,7 +2,7 @@
 
 _This is for demo purposes only!_
 
-[========]
+---
 
 ##### Tech Stack
 
@@ -13,7 +13,7 @@ _This is for demo purposes only!_
 - Stripe [Customer, Product, Payments]
 - Auth0 [User Login / Registraion]
 
-[========]
+---
 
 ### Workflow
 
