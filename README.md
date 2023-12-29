@@ -4,7 +4,7 @@ _This is for demo purposes only!_
 
 ---
 
-##### Tech Stack
+### Tech Stack
 
 - JavaScript
 - Next.js
@@ -15,11 +15,11 @@ _This is for demo purposes only!_
 
 ---
 
-### Workflow
+### Workflow Auth
 
 Auth0 is used for user login and registration. This user data is synced with Stripe via a custom trigger, which adds the Stripe customer ID to the access token, links the user to Stripe, and fully integrates Stripe.
 
-### Client Page
+#### Client Page
 
 If the client needs to update his client information (name, email, shipping and so on) he can do it with the "edit-icon". This function allows updating all client data in real time, which is very efficient because the webshop owner doesn't need to edit data manually.
 
