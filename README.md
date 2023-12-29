@@ -76,6 +76,14 @@ To check if all dependencies match the latest package version run:
 3. For AUTH_SECRET - run: openmssl rand -hex 32
 4. Add the Auth0 Keys, IDs & Domain
 
+###### Snippet:
+
+AUTH0_SECRET='use [openssl rand -hex 32] to generate a 32 bytes value'
+AUTH0_BASE_URL='http://localhost:3000'
+AUTH0_ISSUER_BASE_URL='https://{yourDomain}'
+AUTH0_CLIENT_ID='{yourClientId}'
+AUTH0_CLIENT_SECRET='{yourClientSecret}'
+
 # Git Commits Legend
 
 - Add | Description
