@@ -36,8 +36,6 @@ If the client needs to update his client information (name, email, shipping and 
   - Last 4 Numbers
   - Residue
 
----
-
 **This is not included to edit as a client:**
 
 - Last 4 Orders
