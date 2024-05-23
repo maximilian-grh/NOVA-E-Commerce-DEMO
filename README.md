@@ -1,9 +1,3 @@
-#### © NOVA Kreativagentur OG
-
-_This is for demo purposes only!_
-
----
-
 ### Tech Stack
 
 - JavaScript
