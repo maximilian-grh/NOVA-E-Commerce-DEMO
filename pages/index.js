@@ -5,8 +5,8 @@ export default function Home() {
   return (
     <>
       <Head>
-        <title>NOVA E-Commerce DEMO</title>
-        <meta name="description" content="NOVA E-Commerce DEMO" />
+        <title>Online Shop Template</title>
+        <meta name="description" content="Online Shop Template" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
